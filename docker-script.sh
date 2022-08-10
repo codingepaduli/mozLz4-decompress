@@ -2,16 +2,22 @@
 
 # This script decompress the bookmarks.jsonl4 into bookmarks.json
 
+echo "arguments: $@"
+
 if [ $# -ne 2 ]; then 
     echo "This script decompress the bookmarks.jsonl4 into bookmarks.json"
     echo "Syntax:"
-    echo "    ./script.sh path/to/bookmark.jsonlz4 path/to/bookmarks.json"
+    echo "    ./docker-script.sh path/to/bookmark.jsonlz4 path/to/bookmarks.json"
     exit 1
 fi
 
 # Current directory
 currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-mozillaDir="$( cd "$( dirname "$1" )" && pwd )"
+bookmarksFolder="$( cd "$( dirname "$1" )" && pwd )"
 
-docker container run --rm -it -u $(id -u ${USER}):$(id -g ${USER}) --name MozLz4-decompress -v "$PWD":/usr/src/myapp -v "$mozillaDir":/usr/src/mozillaDir -w /usr/src/myapp -e PYTHONDONTWRITEBYTECODE=1 python:3.10-slim /bin/bash -l -c 'pip3.10 install --no-cache-dir lz4 && python /usr/src/myapp/mozlz4.py -d /usr/src/mozillaDir/$1 $2'
+bookmarksFile=`basename $1`
+
+echo "folders: --------- $bookmarksFolder ----------- $bookmarksFile"
+
+docker container run --rm -it -u $(id -u ${USER}):$(id -g ${USER}) --name MozLz4-decompress -v "$PWD":/usr/src/myapp -v "$PWD/.local":"/.local" -v "$bookmarksFolder":/usr/src/bookmarksFolder -w /usr/src/myapp -e PYTHONDONTWRITEBYTECODE=1 python:3.10-slim /bin/bash -l -c "pip install --no-cache-dir lz4 && python /usr/src/myapp/mozlz4.py -d /usr/src/bookmarksFolder/$bookmarksFile $2"
