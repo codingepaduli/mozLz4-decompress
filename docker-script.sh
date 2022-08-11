@@ -2,8 +2,6 @@
 
 # This script decompress the bookmarks.jsonl4 into bookmarks.json
 
-echo "arguments: $@"
-
 if [ $# -ne 2 ]; then 
     echo "This script decompress the bookmarks.jsonl4 into bookmarks.json"
     echo "Syntax:"
