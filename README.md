@@ -25,6 +25,8 @@ docker container run --rm -it -u $(id -u ${USER}):$(id -g ${USER}) --name MozLz4
     -l -c 'pip install --no-cache-dir lz4 && python /usr/src/myapp/mozlz4.py -d path/to/bookmark.jsonlz4 bookmarksRaw.json'
 ```
 
+You can get an example in the file ``docker-script.sh``.
+
 ## License
 
 MIT License. Read the file LICENSE
