@@ -18,6 +18,4 @@ bookmarksFolder="$( cd "$( dirname "$1" )" && pwd )"
 
 bookmarksFile=`basename $1`
 
-echo "folders: --------- $bookmarksFolder ----------- $bookmarksFile"
-
 docker container run --rm -it -u $(id -u ${USER}):$(id -g ${USER}) --name MozLz4-decompress -v "$PWD":/usr/src/myapp -v "$PWD/.local":"/.local" -v "$bookmarksFolder":/usr/src/bookmarksFolder -w /usr/src/myapp -e PYTHONDONTWRITEBYTECODE=1 python:3.10-slim /bin/bash -l -c "pip install --no-cache-dir lz4 && python /usr/src/myapp/mozlz4.py -d /usr/src/bookmarksFolder/$bookmarksFile $2"
