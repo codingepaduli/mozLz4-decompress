@@ -12,8 +12,14 @@ You need python3 and the [LZ4 library python3-lz4](https://pypi.python.org/pypi/
 
 Run as python script as the following:
 
-```
+```bash
 python3 mozlz4.py -d path/to/bookmark.jsonlz4 bookmarksRaw.json
+```
+
+The output file is not formatted. If you want to pretty print the output, run the following:
+
+```bash
+python3 -m json.tool "path/to/bookmarksRaw.json" > "path/to/bookmarks.json"
 ```
 
 To run in docker, create the folder ``.local`` and execute docker as the following:
