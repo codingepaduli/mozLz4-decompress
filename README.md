@@ -4,7 +4,7 @@ Decompression utility for Mozilla FireFox bookmarks file, that is a JSON file co
 
 Note from internet: The mozLz4 format is just plain LZ4 data with a custom header (magic number [8 bytes] and uncompressed file size [4 bytes, little endian]).
 
-### Prerequisites
+## Prerequisites
 
 You need python3 and the [LZ4 library python3-lz4](https://pypi.python.org/pypi/lz4).
 
@@ -36,4 +36,3 @@ You can get an example in the file ``docker-script.sh``.
 ## License
 
 MIT License. Read the file LICENSE
-
